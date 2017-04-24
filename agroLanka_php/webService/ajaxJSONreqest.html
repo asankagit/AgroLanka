@@ -1,0 +1,46 @@
+<html>
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script-->
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script-->
+
+
+<script>
+//link API:https://developers.google.com/maps/documentation/elevation/intro
+//
+//https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034|36.455556,-116.866667&key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk
+var imported = document.createElement('script');
+imported.src = 'jquery.min.js';
+document.head.appendChild(imported);
+
+
+
+alert("hi");
+document.write("line 1");
+callURL() ;
+
+document.write("line 2");
+function callURL()  {
+alert("ajax");
+    $.ajax({
+        url: 'json.txt',
+        type: "GET",
+        dataType: "jsonp",
+        async: false,
+        success: function(msg)  {
+			//document.write(msg);
+            JsonpCallback(msg);
+        },
+        error: function()  {
+			document.write("err: ");
+            //ErrorFunction();
+        }
+    });
+}
+
+function JsonpCallback(json)  {
+
+    document.getElementById('result').innerHTML =json.results[0].location.lat;
+}
+</script>
+
+<div id="result"></div>
+</html>

@@ -1,0 +1,14 @@
+//https://codepen.io/jhawes/pen/ujdgK
+//polygon with coordinates;
+
+
+flood fill algorythems,scan fill algorythems
+http://minocys.azurewebsites.net/javascript-flood-fill-alorithm/
+
+js OOP concept
+http://stackoverflow.com/questions/3641229/class-variable-in-javascript
+
+import js to js
+https://www.nczonline.net/blog/2009/07/28/the-best-way-to-load-external-javascript/
+
+Ray casting algorithm

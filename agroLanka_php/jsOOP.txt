@@ -1,0 +1,25 @@
+//https://www.w3schools.com/js/js_object_methods.asp
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+function person(firstName,lastName,age,eyeColor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.eyeColor = eyeColor;
+    this.changeName = function (name) {
+        this.lastName = name;
+    }
+}
+var myMother = new person("Sally","Rally",48,"green");
+//myMother.changeName("Doe");
+document.getElementById("demo").innerHTML =
+"My mother's last name is " + myMother.lastName;
+</script>
+
+</body>
+</html>

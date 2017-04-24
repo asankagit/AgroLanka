@@ -1,0 +1,149 @@
+<html>
+<head>
+
+<script src="person.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+<script>
+//http://stackoverflow.com/questions/3641229/class-variable-in-javascript
+function Person(name) {
+    this.name = name;
+}
+Person.prototype = {
+    speak: function(){
+        alert(this.name + ' says: "Hello world!"');
+    }
+};
+function name(){
+            this.name;
+            this.lastname;
+        }
+        name.prototype.firstName=function(name){
+            this.name = name;
+            alert(this.name);
+
+ }
+       
+var x = new name();
+x.firstName("Kartikeya");
+var Mary = new Person('Mary');
+Mary.speak(); // alerts 'Mary says: "Hello world!"'
+
+
+		
+var p = new Person('mari');
+alert(p.name); // 'Mary', yay!
+//alert(name);   // undefined, yay!
+
+</script>
+<script>
+
+var myMother = new person("Sally","Rally",48,"green");
+myMother.changeName("Do nut");
+alert( myMother.lastName);
+
+var path=[{lat:65,lng:99}
+			,{lat: 36.579, lng: -118.292}];
+var ele=new bus();
+alert("pppppppppppp"+ele.check(path));
+
+var req =new JsonReq();
+document.write(req.getdata());
+
+var sealvl=point_elevation();
+document.write(sealvl.getJSON());
+
+
+</script>
+<script>
+/*var imported = document.createElement('script');
+imported.src = 'josnCreate.js';
+document.head.appendChild(imported);
+contour map:http://contourmapcreator.urgr8.ch/
+*/
+
+function car(){
+
+
+	this.name="oop_name";
+	this.check=function(path){
+	alert("inside test car:"+path[1].lng);
+	}
+}
+
+</script>
+
+<script>
+var path=[{lat:65,lng:99}
+			,{lat: 36.579, lng: -118.292}];
+var ele=new car();
+ele.check(path);
+
+document.write("line44");
+var man=person("asanka");
+document.write("line 46");
+//man.alert_fun("hi asanka");
+document.write("line48");	
+/*
+var getJSON = function(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status == 200) {
+        resolve(xhr.response);
+      } else {
+        reject(status);
+      }
+    };
+    xhr.send();
+  });
+};
+
+getJSON('https://maps.googleapis.com/maps/api/elevation/json?locations=7.659839,%2081.196465&key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk').then(function(data) {
+    alert('Your Json result is:  ' + data.result); //you can comment this, i used it to debug
+
+    result.innerText = data.result; //display the result in an HTML element
+}, function(status) { //error detection....
+  alert('Something went wrong.');
+});
+*/
+document.write("line 80");
+CallURL();
+
+function CallURL()  {
+document.write("line114");
+alert("ajax");
+    $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=7.659839,81.196465&key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk',
+        type: "GET",
+        dataType: "jsonp",
+        async: false,
+        success: function(msg)  {
+			//document.write(msg);
+            //JsonpCallback(msg);
+        },
+        error: function(msg)  {
+			document.write("err"+msg.);
+            //ErrorFunction();
+        }
+    });
+}
+
+function JsonpCallback(json)  {
+	//alert(json.result);
+    document.getElementById('result').innerHTML =json.result;
+}
+</script>
+
+
+  <body>
+	<div id="result" style="color:red"></div>
+	<div id="demo">ff</div>
+  </body>
+</html>

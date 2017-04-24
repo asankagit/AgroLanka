@@ -1,0 +1,100 @@
+
+{
+  "response": {
+  "version":"0.1",
+  "key":"http://api.wunderground.com/api/bef57c901caeff8d/conditions/q/CA/colombo.json",
+  "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+  "features": {
+  "conditions": 1
+  }
+		, "results": [
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "1",
+		"country": "SB",
+		"country_iso3166":"LK",
+		"country_name":"Sri Lanka",
+		"zmw": "00000.1.43450",
+		"l": "/q/zmw:00000.1.43450"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "AT",
+		"country": "HO",
+		"country_iso3166":"HN",
+		"country_name":"Honduras",
+		"zmw": "00000.20.78706",
+		"l": "/q/zmw:00000.20.78706"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "CM",
+		"country": "MX",
+		"country_iso3166":"MX",
+		"country_name":"Mexico",
+		"zmw": "00000.20.76654",
+		"l": "/q/zmw:00000.20.76654"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "FS",
+		"country": "ZA",
+		"country_iso3166":"ZA",
+		"country_name":"South Africa",
+		"zmw": "00000.36.68549",
+		"l": "/q/zmw:00000.36.68549"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "MA",
+		"country": "ID",
+		"country_iso3166":"ID",
+		"country_name":"Indonesia",
+		"zmw": "00000.3.97790",
+		"l": "/q/zmw:00000.3.97790"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "PR",
+		"country": "BZ",
+		"country_iso3166":"BR",
+		"country_name":"Brazil",
+		"zmw": "00000.160.83842",
+		"l": "/q/zmw:00000.160.83842"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "RS",
+		"country": "BZ",
+		"country_iso3166":"BR",
+		"country_name":"Brazil",
+		"zmw": "00000.18.83941",
+		"l": "/q/zmw:00000.18.83941"
+		}
+		,
+		{
+		"name": "Colombo",
+		"city": "Colombo",
+		"state": "SP",
+		"country": "BZ",
+		"country_iso3166":"BR",
+		"country_name":"Brazil",
+		"zmw": "00000.33.WSBSR",
+		"l": "/q/zmw:00000.33.WSBSR"
+		}
+		]
+	}
+}

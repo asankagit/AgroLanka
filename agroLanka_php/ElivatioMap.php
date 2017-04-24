@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      height: 100%;
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Showing elevation along a path</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -23,11 +23,18 @@
     <div>
       <div id="map" style="height:250px;"></div>
       <div id="elevation_chart"></div>
-      <script>
-        // Load the Visualization API and the columnchart package.
-      google.load('visualization', '1', {packages: ['columnchart']});
+    
 
-      function initMap() {
+	<script>
+        // Load the Visualization API and the columnchart package.
+    function elevation(){ 
+	alert("loaded");
+	this.initMap();
+	
+	
+	google.load('visualization', '1', {packages: ['columnchart']});
+	this.initMap=function() {
+	alert("load initmap");
         // The following path marks a path from Mt. Whitney, the highest point in the
         // continental United States to Badwater, Death Valley, the lowest point.
         var path = [
@@ -37,7 +44,8 @@
             {lat: 36.588, lng: -116.943},  // Beatty Junction
             {lat: 36.34, lng: -117.468},  // Panama Mint Springs
             {lat: 36.24, lng: -116.832}];  // Badwater, Death Valley
-
+			
+		
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 8,
           center: path[1],
@@ -91,6 +99,7 @@
         data.addColumn('number', 'Elevation');
         for (var i = 0; i < elevations.length; i++) {
           data.addRow(['', elevations[i].elevation]);
+		  alert("Elivation"+elevations[i].elevation);
         }
 
         // Draw the chart using the data within its DIV.
@@ -100,9 +109,11 @@
           titleY: 'Elevation (m)'
         });
       }
+	  
+	  }
       </script>
       <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk&callback=elevation">
       </script>
     </div>
   </body>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="id01"></div>
+
+<script>
+connection();
+
+function connection(){
+	var jsonData;
+	var xmlhttp = new XMLHttpRequest();
+	var url = "json.txt";
+
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				alert("connected")
+				var myArr = JSON.parse(this.responseText);
+				alert("came tes line 1");
+				myFunction(myArr);
+				josnData=myArr;
+			}else{
+			alert(this.readyState+":"+this.status);
+			}
+		};
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	alert("test line 2");
+	
+	return jsonData;
+}
+
+function myFunction(arr) {
+alert("test line 3");
+	var i;
+	var prnt;
+	
+	for(i=0;i<arr.results.length;i++){
+		prnt+= arr.results[i].elevation+"<br>"+arr.results[i].location.lat+":"+arr.results[i].location.lat+"<br><br>";
+	}
+	document.getElementById("id01").innerHTML =prnt;
+	
+	
+}
+function oopConn(){
+	
+}
+</script>
+
+</body>
+</html>

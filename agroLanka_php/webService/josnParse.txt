@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Access a JSON object using bracket notation:</p>
+
+<p id="demo"></p>
+
+<script>
+
+var myObj, x;
+myObj = {
+   "results" : [
+      {
+         "elevation" : 95,
+         "location" : {
+            "lat" : 7.659839,
+            "lng" : 81.196465
+         },
+         "resolution" : 152.7032318115234
+      }
+   ],
+   "status" : "OK"
+};
+x = myObj.results[0].location.lat;
+document.getElementById("demo").innerHTML = x;
+
+</script>
+
+</body>
+</html>
+-------------------------------------------------------josn Array
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Access a JSON object using bracket notation:</p>
+
+<p id="demo"></p>
+
+<script>
+
+var myObj, x;
+myObj = [{"lat":"56"},{
+   "results" : [
+      {
+         "elevation" : 95,
+         "location" : {
+            "lat" : 7.659839,
+            "lng" : 81.196465
+         },
+         "resolution" : 152.7032318115234
+      }
+   ],
+   "status" : "OK"
+}];
+x = myObj[1].results[0].location.lat;
+document.getElementById("demo").innerHTML = x;
+
+</script>
+
+</body>
+</html>
