@@ -3,16 +3,12 @@
 	<head></head>
 	<input type="button" onclick="initMap()"> 
 <script>
-	connection("xd");
-	//test();
-function connection(location){
+	//connection();
+function connection(){
 	//var jsonData;
 	var xmlhttp = new XMLHttpRequest();
-	var url = "http://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034|39.79562,89.23561&key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk";
+	var url = "https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034|39.79562,89.23561&key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk";
 	
-	//alert(url);
-	//var url = "wunderground-pol.txt";
-
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				alert("connected");
@@ -87,16 +83,18 @@ var http = new XMLHttpRequest();
     <div id="map"></div>
 	
     <script>
-      function initMap() {
+      function initMap(arr) {
 	  
         /*var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 8,
           center: {lat: 63.333, lng: -150.5},  // Denali.
           mapTypeId: 'terrain'
         });*/
+		
         var elevator =null;
         elevator=new google.maps.ElevationService;
 		display(elevator);
+		
 		
         //var infowindow = new google.maps.InfoWindow({map: map});
 
@@ -110,29 +108,19 @@ var http = new XMLHttpRequest();
       }
 function display(ele){
 	alert("dMap");
-	ele.getElevationForLocations({'locations':[{lat:63.33,lng:-150.2}]},function(results, status){
+	location[0] ={lat:63.33,lng:-150.2};
+	location[1] ={lat:62.33,lng:-125.2};
+	location_arr=[];
+	location_arr=location;
+	ele.getElevationForLocations({'locations':[location_arr]},function(results, status){
 		alert(status);
 		alert("result"+results[0].elevation);
+			
 		
 	}
 	);
-	/*elevator.getElevationForLocations({
-          'locations': [lat: 63.333, lng: -150.5]
-        }, function(results, status) {
-          
-          if (status === 'OK') {
-            // Retrieve the first result
-            if (results[0]) {
-              // Open the infowindow indicating the elevation at the clicked position.
-              //infowindow.setContent('The elevation at this point <br>is ' +
-                  results[0].elevation ;//+ ' meters.');
-            } else {
-              //infowindow.setContent('No results found');
-            }
-          } else {
-            //infowindow.setContent('Elevation service failed due to: ' + status);
-          }
-        });*/
+	
+	
 	
 }
       function displayLocationElevation(location, elevator, infowindow) {
