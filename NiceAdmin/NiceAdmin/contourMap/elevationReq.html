@@ -110,9 +110,8 @@ function display(ele){
 	alert("dMap");
 	location[0] ={lat:63.33,lng:-150.2};
 	location[1] ={lat:62.33,lng:-125.2};
-	location_arr=[];
-	location_arr=location;
-	ele.getElevationForLocations({'locations':[location_arr]},function(results, status){
+	
+	ele.getElevationForLocations({'locations':[location[0],location[1]]},function(results, status){
 		alert(status);
 		alert("result"+results[0].elevation);
 			
