@@ -66,45 +66,45 @@ var Script = function () {
         },
         events: [
             {
-                title: 'All Day Event',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, 1)
             },
             {
-                title: 'Long Event',
+                title: 'Open sluice 2 gate(s) for 20min(10 inc)',
                 start: new Date(y, m, d-5),
                 end: new Date(y, m, d-2)
             },
             {
                 id: 999,
-                title: 'Repeating Event',
+                title: '',
                 start: new Date(y, m, d-3, 16, 0),
                 allDay: false
             },
             {
                 id: 999,
-                title: 'Repeating Event',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, d+4, 16, 0),
                 allDay: false
             },
             {
-                title: 'Meeting',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, d, 10, 30),
                 allDay: false
             },
             {
-                title: 'Lunch',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, d, 12, 0),
                 end: new Date(y, m, d, 14, 0),
                 allDay: false
             },
             {
-                title: 'Birthday Party',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, d+1, 19, 0),
                 end: new Date(y, m, d+1, 22, 30),
                 allDay: false
             },
             {
-                title: 'Click for Google',
+                title: 'Open sluice 1 gate(s) for 20min(1 inc)',
                 start: new Date(y, m, 28),
                 end: new Date(y, m, 29),
                 url: 'http://google.com/'
