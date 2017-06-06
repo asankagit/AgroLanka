@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html >
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Google Maps Polygon Coordinates Tool</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    
+<body onload="initialize+++()">
+  <h3>Drag or re-shape for coordinates to display below</h3>
+  <h3><a href="http://codepen.io/jhawes/blog/creating-a-real-estate-polygon-tool">See blog post</a></h3>
+  <div id="map-canvas"></div>
+  <div class="lngLat"><span class="one">Lat</span><span class="two">,Lng</span></div>
+</body>
+<button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('info').innerHTML)">Copy to Clipboard</button>
+<textarea id="info"></textarea>
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+	<script src="js/index.js"></script>
+	<script src="ponit_withinPolygon.js"></script>
+	
+	<script>
+	//----------------------------------------------------------------
+//test point with in polygon
+	var poline=initialize();
+	var polygon = poline;//new google.maps.Polygon([], "#000000", 1, 1, "#336699", 0.3);
+	var isWithinPolygon = polygon.containsLatLng(33.51593,-111.93318);
+	alert(isWithinPolygon);
+	var map=polygonPath(function(msg){
+		//alert("call back line 35"+msg);
+	});
+	//alert(map);
+
+
+	loadScript("js/testjs.js", function(){
+		test();
+		
+		/*var polygon = new google.maps.Polygon([], "#000000", 1, 1, "#336699", 0.3);
+		var isWithinPolygon = polygon.containsLatLng(40, -90);*/
+		
+	});
+	
+	function loadScript(url, callback){
+
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+
+    if (script.readyState){  //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" ||
+                    script.readyState == "complete"){
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else {  //Others
+        script.onload = function(){
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+	}
+
+	
+	</script>
+	
+	
+	
+
+    
+    
+    
+  </body>
+</html>

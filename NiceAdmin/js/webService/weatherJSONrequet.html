@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="id01"></div>
+<script>
+  var callbackFunction = function(data) {
+    var wind = data.query.results.channel.wind;
+    alert(wind.chill);
+  };
+</script>
+
+<script src="https://query.yahooapis.com/v1/public/yql?q=select wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='chicago, il')&format=json&callback=callbackFunction"></script>
+<script> 
+alert(""); 
+
+document.write("js written");
+alert("js script run");
+connection();
+
+function connection(){
+	var jsonData;
+	var xmlhttp = new XMLHttpRequest();
+	//var url = "http://api.wunderground.com/api/bef57c901caeff8d/conditions/q/CA/kurunegala.json";
+	var url = "wunderground-pol.txt";
+
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				alert("connected");
+				
+				
+				
+				
+				var myArr = JSON.parse(this.responseText);
+				alert("came tes line 1");
+				myFunction(myArr);
+				josnData=myArr;
+			}else{
+			alert(this.readyState+":"+this.status);
+			}
+		};
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	alert("test line 2");
+	
+	return jsonData;
+}
+
+function myFunction(arr) {
+alert("test line 3");
+	var i;
+	var prnt="";
+	var city;
+	var geo_lat;
+	var geo_lng;
+	var date;
+	var temp;
+	var rain;
+	//var forecast=[];
+	
+	
+	
+	prnt+=arr.current_observation.display_location.full;
+	//prnt+=arr.response.results[0].name;
+	
+	alert("come before variable assign");
+	
+	city=arr.current_observation.display_location.full;
+	geo_lat=arr.current_observation.display_location.latitude;
+	geo_lng=arr.current_observation.display_location.longitude;
+	date=arr.current_observation.observation_time;
+	temp=arr.current_observation.temperature_string;
+	rain=arr.current_observation.precip_today_string;
+	//forecast=arr.query.results.channel.item.forecast;
+	prnt+=rain;
+	
+	
+	/*for(i=0;i<forecast.length;i++){
+	
+		prnt+=forecast[i].date+':';
+		prnt+=forecast[i].high+':';
+		prnt+=forecast[i].low+':';
+		prnt+=forecast[i].text+'<br>';
+		
+	}*/
+	
+	/*for(i=0;i<arr.results.length;i++){
+		prnt+= arr.results[i].elevation+"<br>"+arr.results[i].location.lat+":"+arr.results[i].location.lat+"<br><br>";
+	}*/
+	document.getElementById("id01").innerHTML =prnt;
+	
+	
+}
+
+
+
+
+</script>
+
+</body>
+</html>

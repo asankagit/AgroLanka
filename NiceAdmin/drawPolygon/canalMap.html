@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+	<style>
+* {box-sizing:border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana,sans-serif;}
+
+.month {
+    padding: 70px 25px;
+    width: 100%;
+    background: #1abc9c;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+</style>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+	<div class="month">      
+  <ul>
+    <li class="prev">&#10094;</li>
+    <li class="next">&#10095;</li>
+    <li style="text-align:center">
+      June<br>
+      <span style="font-size:18px">2017</span>
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+  <li>Sa</li>
+  <li>Su</li>
+</ul>
+
+<ul class="days">  
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li><span class="active">5</span></li>
+  <li>6</li>
+  <li>7</li>
+  <li>8</li>
+  <li>9</li>
+  <li>10</li>
+  <li>11</li>
+  <li>12</li>
+  <li>13</li>
+  <li>14</li>
+  <li>15</li>
+  <li>16</li>
+  <li>17</li>
+  <li>18</li>
+  <li>19</li>
+  <li>20</li>
+  <li>21</li>
+  <li>22</li>
+  <li>23</li>
+  <li>24</li>
+  <li>25</li>
+  <li>26</li>
+  <li>27</li>
+  <li>28</li>
+  <li>29</li>
+  <li>30</li>
+  <li>31</li>
+</ul>
+<div style="background-color:white;height:10px;"> </div>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a 2-pixel-wide red polyline showing the path of William
+      // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+      // Brisbane, Australia.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: {lat: 7.422472, lng:80.337896},
+          mapTypeId: 'roadmap'
+        });
+
+        var flightPlanCoordinates = [
+		
+		  {lat: 7.422852, lng:80.338349},	  
+		  
+		  {lat: 7.422804, lng:80.338161},
+		  {lat: 7.422472, lng:80.337896},
+		  {lat: 7.422472, lng:80.337896},
+		  
+		  {lat:7.422753, lng:80.337709},
+		  {lat:7.423044, lng:80.337241}
+	
+		  
+        ];
+		var canal = [
+		
+		  {lat: 7.425852, lng:80.338349},	  
+		  
+		  {lat: 7.425804, lng:80.338161},
+		  {lat: 7.425472, lng:80.337896},
+		  {lat: 7.425472, lng:80.337896},
+		  
+		  {lat:7.425753, lng:80.337709},
+		  {lat:7.425044, lng:80.337241}
+	
+		  
+        ];
+		var beaches = [
+        ['Bondi Beach', 7.422753,80.337709, 1],
+        ['Coogee Beach', 7.423044,80.337241, 2],
+        ['Cronulla Beach',6.028249, 79.157507, 3],
+        ['Manly Beach', 6.800171, 79.28744187, 4],
+        ['Mabra Beach',6.950198, 79.259302, 5],
+		['May Beach', 6.856, 79.2587, 6],
+        ['Maro Beach',6.95898, 79.282, 7],
+		['Maa Beach',6.950198, 79.259302, 8]
+      ];
+	  var image = {
+          url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/171955-200.png',
+          //url: 'http://game-icons.net/icons/delapouite/originals/svg/tap.svg',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(120, 120),
+          // The origin for this image is (0, 0).
+          //origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          //anchor: new google.maps.Point(0, 32)
+        };
+	   var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Uluru</b></p>'+
+            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+            '(last visited June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
+
+	var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+	for (var i = 0; i < beaches.length; i++) {
+			var beach = beaches[i];
+			var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+			map: map,
+			icon: image,
+			title: beach[0],
+            zIndex: beach[3]
+
+      });
+	  marker.addListener('click', function() {
+			
+			infowindow.open(map, this);
+        });
+	  }
+	marker.setMap(map);
+
+        var flightPath = new google.maps.Polyline({
+          path: flightPlanCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+		var flightPath2 = new google.maps.Polyline({
+          path: canal,
+          geodesic: true,
+          strokeColor: 'blue',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+        });
+
+        flightPath.setMap(map);
+		flightPath2.setMap(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKpX0gxp3zc2E6bLCqVbYbXInBhx5jVVk&callback=initMap">
+    </script>
+  </body>
+</html>
