@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+	<title> Connectors style example </title>
+	<link rel="stylesheet" href="../../Treant.css">
+	<link rel="stylesheet" href="connectors.css">
+	
+	<link rel="stylesheet" href="../../perfect-scrollbar/perfect-scrollbar.css">
+	<!--boottrap-->
+	<link rel="stylesheet" href="http://localhost/Agrolanka/NiceAdmin/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="http://localhost/Agrolanka/NiceAdmin/bootstrap/css/bootstrap.min.css">
+	
+	
+	
+	<!--http://api.jqueryui.com/dialog/#option-position-->
+	<link rel="stylesheet" href="jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#dialog" ).dialog({
+//position: {  my: "top", at: "top+"+my+"px", of: window },
+  position: {  my: "left top", at: "left top", of: window }
+});
+  } );
+  </script>
+</head>
+<body onclick="showCoords(event)">
+
+<a href="http://localhost/Agrolanka/NiceAdmin/drawPolygon/canalMap.html"><input class="btn btn-success" type="button"  onclick="getdata('b89')" value="Switch Map View"></a>
+<div id="dialog" title="Canal Data">
+  <p>
+  
+  <img src=""></p>
+</div>
+	<div class="chart" id="OrganiseChart-big-commpany"></div>
+	
+	<script src="../../vendor/raphael.js"></script>
+	<script src="../../Treant.js"></script>
+	<script src="connectors.js"></script>
+	<script src="ajax_canal_data.js"></script>
+
+	<script>
+
+		new Treant( chart_config );
+		
+	</script>
+<script>
+var mx;
+var my;
+function showCoords(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    var coords = "X coords: " + x + ", Y coords: " + y;
+	mx=x;
+	my=y;
+    //document.getElementById("demo").innerHTML = coords;
+}
+
+//document.getElementById("xx").addEventListener("click", box_show); 
+var x = document.getElementsByClassName("node-name");
+    for(var i=0;i<x.length;i++){
+    x[i].addEventListener("click", box_show); 
+    }
+	
+function box_show(){
+	//alert(this.parentElement.id);
+getdata(this.parentElement.id);
+	 $( function() {
+		$( "#dialog" ).dialog({
+	  //position: {  my: "left", at: "left", of: window },
+	  //position: {  my: "left top", at: "left top+"+my+"px", of: window },
+	  position: {  my: "left top", at: "left top+100px", of: window },
+	  show: { effect: "blind", duration: 800 }
+	});
+	} );					
+}
+var callbackresult="default";
+
+function getdata(id){
+	canal_data(id,function callback(s){
+		callbackresult=s;
+	});
+	//document.getElementById("demo").innerHTML="ffff"+callbackresult;
+//alert(callbackresult);
+	msg_box=document.getElementById("dialog");
+	while (msg_box.hasChildNodes()) {
+			msg_box.removeChild(msg_box.firstChild);
+	 }
+	 
+	 var canal=JSON.parse(callbackresult);
+	 
+	 var table = document.createElement("TABLE");
+	 var row = table.insertRow(0);
+	 var cell1 = row.insertCell(0);
+	 var cell2 = row.insertCell(1);
+	 var cell3 = row.insertCell(2);
+	 var row = document.createElement("TR");
+	 var td1 = document.createElement("TD");
+	 var td2 = document.createElement("TD");
+	 var td3 = document.createElement("TD");
+		td1.setAttribute("id", "id");
+		td2.setAttribute("id", "max");
+		td3.setAttribute("id", "usage");
+	 
+	 var id = document.createTextNode(canal.id);
+	 var max_volume = document.createTextNode(canal.max_volume);
+	 var usage = document.createTextNode(canal.usage);
+	 
+	td1.appendChild(id);
+	td2.appendChild(max_volume);
+	td3.appendChild(usage);
+	row.appendChild(td1);
+	row.appendChild(td2);
+	row.appendChild(td3);
+	table.appendChild(row);
+	 
+	 cell1.innerHTML = "Canal";
+	 cell2.innerHTML = "Capacity(cubic meters per munite)";
+	 cell3.innerHTML = "Usage(cubic meters per munite)";
+	 
+var input_width=document.createElement("input");
+	input_width.setAttribute("id","txt_width");
+	input_width.setAttribute("style","color:red;margin-top:10px");
+var input_height=document.createElement("input");
+	input_height.setAttribute("id","txt_height");
+	input_height.setAttribute("style","color:red");
+var btn_cal=document.createElement("button");
+	btn_cal.setAttribute("id","btn_cal");
+	var text=document.createTextNode("calculate");
+	btn_cal.appendChild(text);
+	
+var t = document.createTextNode(callbackresult);
+msg_box.appendChild(table);
+msg_box.appendChild(input_width);
+msg_box.appendChild(input_height);
+msg_box.appendChild(btn_cal);
+}
+</script>
+<style>
+table, td {
+    border: 1px solid black;
+}
+</style>
+
+</body>
+</html>

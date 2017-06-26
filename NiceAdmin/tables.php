@@ -2,6 +2,10 @@
 
 <?php 
 session_start();
+if($_SESSION["user_id"]==""){
+	echo "".$_SESSION["user_id"];
+	header('Location: http://localhost/Agrolanka/NiceAdmin/login.html');
+}
 include "php/conn.php";
 
 
@@ -43,7 +47,7 @@ function getmax($bin,$user){
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
     <!--script type="text/javascript" src="js/admin.js"></script-->
-	<script type="text/javascript" src="js/bidable_bin.js"></script>
+	<script type="text/javascript" src="js/table_ui/bidable_bin.js"></script>
 	<script type="text/javascript" src="js/Chart.js"></script>
 
     <style type="text/css">
@@ -61,7 +65,12 @@ function getmax($bin,$user){
   	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
   	<!-- DataTables Initialization -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/datatables/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="js/table_ui/hide_show_div.js"></script>
+	<script type="text/javascript" src="js/table_ui/ajax_snd_to_php.js"></script>
+	<script type="text/javascript" src="js/table_ui/session_on_off.js"></script>
+	<script type="text/javascript" src="js/table_ui/bidable_bin.js"></script>
   			<script type="text/javascript" charset="utf-8">
   			    $(document).ready(function () {
   			        $('#dt1').dataTable();
@@ -107,7 +116,8 @@ function getmax($bin,$user){
 	            <tr>
 	              <th> ID</th>
 				  <th>Filed name</th>
-	              <th>Current Volume</th>
+	              <th>Gramaseva Division</th>
+				  <th>Current Volume</th>
 	              <th>Crop Variation</th>
 				   <th>Cultivation</th>
 				  
@@ -118,7 +128,7 @@ function getmax($bin,$user){
 	            
 				<?php 
 					$ifChecked ='';
-				
+					$staus=0;
 					$sql = "SELECT * FROM paddyfield where farmerid='".$_SESSION["user_id"]."'";
 					$result = $conn->query($sql);
 
@@ -135,9 +145,10 @@ function getmax($bin,$user){
 							*/
 							if($row['status']>0){
 								$ifChecked ='checked';
-								
+								$staus=1;
 							}else{
 								$ifChecked ='';
+								$staus=0;
 							}
 							
 							//End of getting the intial toggle
@@ -147,12 +158,13 @@ function getmax($bin,$user){
 								<tr id="'.$row["id"].'" onclick="showchart(this.id);">
 								  <td>'.$row["id"].'</td>
 								  <td>'.$row["name"].'</td>
+								  <td>'.$row["gramaseva_div"].'</td>
 								 
-								  <td class="center">'.$row["location"].'</td-->
+								  <td class="center">'.$row["acres"].'</td>
 								 
 								  <td>See Crop Variation &nbsp &nbsp <a href="php/displayWinner.php?binid='.$row["id"].'&userid='.$_SESSION["user_id"].'"><span class="glyphicon glyphicon-triangle-right"></a></td>
 								  <td> <label class="switch">'.
-									  "<input id='sw' ".$ifChecked."  type=\"checkbox\" onclick=\"addto_sess(".$row["id"].",'".$_SESSION["user_id"]."')\"> ".
+									  "<input id='sw' ".$ifChecked."  type=\"checkbox\" onclick=\"addto_sess(".$row["id"].",'".$_SESSION["user_id"]."',".$staus.",".$row["acres"].")\"> ".
 									  '<div class="slider round"></div>
 									</label>
 								  </td>
@@ -174,6 +186,8 @@ function getmax($bin,$user){
 	          </tbody>
 	         </table><!--/END First Table -->
 			 <br>
+			 <div class="btn btn-success" id="form_sh_addnew_pf" onclick="display()">Add New Paddy Fields</div>
+			 <br>
 			 <!--SECOND Table -->
 
 
@@ -185,7 +199,7 @@ function getmax($bin,$user){
       </div><!-- /row -->
 	  <div class="row col-sm-2" > </div>
 	  <div class="row col-sm-10" align="center" > 
-		<div class="panel-body text-center" style="background-color:lavender">
+		<div class="panel-body text-center" style="display:none;background-color:lavender">
 			<h2>Anual Water levels</h2>
            <canvas id="canvas" style="" id="line" height="200" width="550"></canvas>
 		   <script>
@@ -244,8 +258,28 @@ function getmax($bin,$user){
 	</script>
         </div>
 	  </div>
+	  <div class="form-group add-new-field" id="div_new_pf_add">
+	  <br>
+		<form  id="frm_new_pf">
+			<tr>
+			<label for="fieldname" class="col-sm-2" >Field</label>
+			<label for="a" class="col-sm-1">Volume</label>
+			<label for="l" class="col-sm-2">Location</label>
+			<label for="gd" class="col-sm-2">Gramaseva Divsion</label><br>
+			</tr>
+			<br>
+			<input id="txt_pf_name" type="fieldname" class="form-control-col-sm-2" id="email" placeholder="කුඹුරේ නම">
+			<input id="txt_pf_area" type="a" class="form-control-col-sm-2" id="email" placeholder="අක්කර ප්රමාණය">
+			<input id="txt_pf_gps" type="l" class="form-control-col-sm-2" id="email" placeholder="භූ පිහිටුම">
+			<input id="txt_pf_grama" type="gd" class="form-control-col-sm-2" id="email" placeholder="ග්රාමසේවා කොට්ඨාශය">
+			
+			<br><br><input type="button" value="add" class="btn btn-red" id="btn_add_new_paddyfld" onclick="new_pf_to_DB()">
+		
+		</form>
+	  </div>
 	  <!--div class="row" align="center"> 
 	  <br/>
+	  
 		<a href="pathFinder/PathBucket.html"><button class="btn btn-success">View Map</button></a>
 	  </div-->
      </div> <!-- /container -->
